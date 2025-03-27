@@ -102,3 +102,21 @@ Essa arquitetura garante que seu projeto seja flexível, escalável e eficiente 
    - `200 OK`: Status do vídeo <videoId>: COMPLETED
    - `404 Not Found`: Erro ao buscar status do vídeo: Vídeo não encontrado <videoId>
 
+### 2. **Lista todos vídeos**
+   **URL:** `/videos`  
+   **Método:** `GET`  
+   **Descrição:**  Endpoint que retorna a lista completa dos vídeos independente do status.
+
+   **Respostas:**
+   - `200 OK`: Lista de registros de vídeo. Exemplo:
+      ```
+      [
+         {
+            "id": 1,
+            "filename": "310dda18-a997-4140-93fc-77535fb13036",
+            "status": "COMPLETED",
+            "uploadTime": "2025-03-27T19:17:28.763438",
+            "username": "johndoe"
+         }
+      ]
+      ```

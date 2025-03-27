@@ -1,5 +1,7 @@
 package com.example.hackaton.demo.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.hackaton.demo.model.Video;
 import com.example.hackaton.demo.service.VideoService;
 
 @RestController
@@ -52,6 +55,14 @@ public class VideoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                                  .body("Erro ao buscar status do vídeo: " + e.getMessage());
         }
+    }
+    /**
+     * Endpoint para buscar todos os vídeos
+     */
+    @GetMapping()
+    public ResponseEntity<List<Video>> getAllVideos() {
+        List<Video> videos = videoService.getAllVideos();
+        return ResponseEntity.ok(videos);
     }
 }
 

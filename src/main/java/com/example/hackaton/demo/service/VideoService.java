@@ -3,6 +3,7 @@ package com.example.hackaton.demo.service;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -85,6 +86,14 @@ public class VideoService {
         Optional<Video> videoOptional = videoRepository.findByFilename(videoId);
         return videoOptional.map(video -> video.getStatus().name())
                             .orElseThrow(() -> new RuntimeException("Vídeo não encontrado: " + videoId));
+    }
+
+    /**
+     * Retorna todos videos registrados.
+     */
+    public List<Video> getAllVideos() {
+        List<Video> videos = videoRepository.findAll();
+        return videos;
     }
 }
 

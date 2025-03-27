@@ -42,6 +42,8 @@ services:
     depends_on:
       postgres:
         condition: service_started
+      kafka:
+        condition: service_started
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/mydb
       - SPRING_DATASOURCE_USERNAME=user
