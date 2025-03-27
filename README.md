@@ -100,6 +100,5 @@ Essa arquitetura garante que seu projeto seja flexível, escalável e eficiente 
 
    **Respostas:**
    - `200 OK`: Status do vídeo <videoId>: COMPLETED
-
    - `404 Not Found`: Erro ao buscar status do vídeo: Vídeo não encontrado <videoId>
 
