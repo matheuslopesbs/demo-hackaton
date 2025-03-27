@@ -1,4 +1,5 @@
 
+# **Hackaton: Processamento de Vídeo
 
 ## **Visão Geral do Projeto**
 
@@ -20,7 +21,7 @@ Os principais componentes são:
    Aqui está um exemplo de log:
 
    ```
-   2025-03-26 22:11:06 Mensagem enviada ao Kafka para processar o vídeo: 2a064b6b-af7e-4830-a993-0211a8d20c72
+   Mensagem enviada ao Kafka para processar o vídeo: 2a064b6b-af7e-4830-a993-0211a8d20c72
    ```
 
 2. **Processamento Assíncrono via Kafka**:
@@ -31,7 +32,7 @@ Os principais componentes são:
    Exemplo de log quando a mensagem é recebida pelo consumer:
 
    ```
-   2025-03-26 22:11:07 Mensagem recebida para processar o vídeo: 2a064b6b-af7e-4830-a993-0211a8d20c72
+   Mensagem recebida para processar o vídeo: 2a064b6b-af7e-4830-a993-0211a8d20c72
    ```
 
 3. **Processamento do Vídeo**:
@@ -42,7 +43,7 @@ Os principais componentes são:
    Exemplo de log indicando que o processamento foi concluído:
 
    ```
-   2025-03-26 22:11:09 Processamento concluído e arquivo zip gerado: /videos/output/2a064b6b-af7e-4830-a993-0211a8d20c72.zip
+   Processamento concluído e arquivo zip gerado: /videos/output/2a064b6b-af7e-4830-a993-0211a8d20c72.zip
    ```
 
 
