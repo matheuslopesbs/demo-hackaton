@@ -1,6 +1,6 @@
 
 
-### **Visão Geral do Projeto**
+## **Visão Geral do Projeto**
 
 O projeto consiste em um sistema que processa vídeos e utiliza uma arquitetura de microsserviços, com integração via Kafka para comunicação assíncrona entre os componentes. O processamento envolve manipulação de vídeos (usando o FFmpeg) e o resultado é gerado como um arquivo ZIP contendo imagens extraídas do vídeo.
 
@@ -46,7 +46,6 @@ Os principais componentes são:
    ```
 
 
-
 ### **Kafka no Processo**
 
 Kafka é o coração da comunicação assíncrona entre os serviços no seu projeto. Aqui estão os pontos chave:
@@ -66,3 +65,40 @@ Essa abordagem assíncrona é ideal para processamentos que podem ser demorados,
 - **Mensagens persistentes**: As mensagens enviadas ao Kafka são persistentes, o que significa que mesmo se o serviço de processamento de vídeo estiver temporariamente indisponível, as mensagens serão processadas assim que o serviço estiver novamente disponível.
 
 Essa arquitetura garante que seu projeto seja flexível, escalável e eficiente no processamento de vídeos.
+
+## Endpoints da Aplicação
+
+### 1. **Upload de Vídeo**
+   **URL:** `/videos/upload`  
+   **Método:** `POST`  
+   **Descrição:** Este endpoint permite que um vídeo seja enviado para processamento. O vídeo é salvo em um diretório local e uma mensagem é enviada para o Kafka para iniciar o processamento. Além do vídeo, é necessário fornecer o `username`, que identifica o usuário que fez o upload. O status inicial do vídeo será definido como `PENDING`, e durante o processamento, o status mudará para `PROCESSING`. Ao final, o status será atualizado para `COMPLETED` ou `FAILED` em caso de erro.
+
+   **Parâmetros de Requisição:**
+   - `video`: O arquivo de vídeo que será enviado. O arquivo deve ser do tipo `multipart/form-data`.
+   - `username`: O nome de usuário associado ao upload do vídeo (do tipo `String`).
+
+   **Exemplo de Body da Requisição:**
+   Ao utilizar o Postman ou outra ferramenta, a requisição seria do tipo `form-data`:
+   ```
+   video: [Selecionar Arquivo: video.mp4]
+   username: johndoe
+   ```
+
+   **Respostas:**
+   - `200 OK`: Vídeo recebido e processamento iniciado: <videoId>
+   - `400 Bad Request`: Houve um erro ao salvar o vídeo, o formato de arquivo é inválido, ou o `username` não foi fornecido.
+   - `500 Internal Server Error`: Ocorreu um erro inesperado no processamento do vídeo.
+
+### 2. **Consulta do Status do Vídeo**
+   **URL:** `/videos/status/{videoId}`  
+   **Método:** `GET`  
+   **Descrição:** Este endpoint permite consultar o status de processamento de um vídeo específico. Ao enviar um vídeo para o endpoint de upload, ele é identificado por um `videoId` único. Este endpoint verifica o status atual do vídeo no banco de dados, retornando o status como `PENDING`, `PROCESSING`, `COMPLETED` ou `FAILED`.
+
+   **Parâmetro de Caminho:**
+   - `videoId`: O identificador único do vídeo cujo status será consultado.
+
+   **Respostas:**
+   - `200 OK`: Status do vídeo <videoId>: COMPLETED
+
+   - `404 Not Found`: Erro ao buscar status do vídeo: Vídeo não encontrado: 013daea1-00e9-4203-837c-332ed49e73dadsa 
+
