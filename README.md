@@ -1,5 +1,5 @@
 
-# **Hackaton: Processamento de Vídeo
+# **Hackaton: Processamento de Vídeo**
 
 ## **Visão Geral do Projeto**
 
